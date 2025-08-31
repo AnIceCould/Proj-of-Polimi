@@ -1,0 +1,2 @@
+recall,precision,f1_score,params
+0.8080657206870799,0.09572679819516942,0.17117544692295522,"{'n_estimators': 448, 'max_depth': 3, 'learning_rate': 0.0603984200657432, 'subsample': 0.7253932350684114, 'colsample_bytree': 0.8525098229964715, 'scale_pos_weight': 347.7316930099678, 'min_child_weight': 0.6395019645366216, 'gamma': 0.37369103847898166}"

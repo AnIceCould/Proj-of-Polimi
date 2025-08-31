@@ -1,0 +1,1007 @@
+[
+    {
+        "id": "0b25a34679899bc4",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a3d255ce454e5ed9",
+        "type": "inject",
+        "z": "0b25a34679899bc4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 370,
+        "y": 180,
+        "wires": [
+            [
+                "297fc49cb324d4cd"
+            ]
+        ]
+    },
+    {
+        "id": "297fc49cb324d4cd",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "generate MQTT",
+        "func": "var timestamp = msg.payload; // timestamp\nvar id = Math.floor(Math.random() * 30001) // id [0,30000]\nmsg.topic = 'challenge3/id_generator';\nmsg.payload = {\n    id: id,\n    timestamp: timestamp\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 180,
+        "wires": [
+            [
+                "c0834ae5bf7e87bb",
+                "9e218998cfa2b484",
+                "8db2166520fbbe69"
+            ]
+        ]
+    },
+    {
+        "id": "08685fb68535f5a4",
+        "type": "mqtt out",
+        "z": "0b25a34679899bc4",
+        "name": "MQTT publish",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1e9553aa8f6bd45f",
+        "x": 1000,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "0217f068f8e1339d",
+        "type": "csv",
+        "z": "0b25a34679899bc4",
+        "name": "msg2csv_mqtt",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "once",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "No.,ID,TIMESTAMP",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 1120,
+        "y": 180,
+        "wires": [
+            [
+                "955ae574b508bf8e"
+            ]
+        ]
+    },
+    {
+        "id": "955ae574b508bf8e",
+        "type": "file",
+        "z": "0b25a34679899bc4",
+        "name": "to id_log.csv",
+        "filename": "/home/iotpolimi/Documents/challenges/challenge3/id_log.csv",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1330,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9e218998cfa2b484",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "mqtt count",
+        "func": "// count the number of row\nvar count = flow.get(\"mqttCount\");\ncount = flow.get(\"mqttCount\") + 1;\nflow.set(\"mqttCount\", count);\n\n// add to payload and change name\nmsg.payload = {\n    \"No.\": count,\n    \"ID\": msg.payload.id,\n    \"TIMESTAMP\": msg.payload.timestamp,\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Initialize mqttCount\nflow.set(\"mqttCount\", 0);",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 180,
+        "wires": [
+            [
+                "0217f068f8e1339d",
+                "2a7077964c0d0cc3"
+            ]
+        ]
+    },
+    {
+        "id": "d6599cc21e4a3930",
+        "type": "mqtt in",
+        "z": "0b25a34679899bc4",
+        "name": "",
+        "topic": "challenge3/id_generator",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "1e9553aa8f6bd45f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 360,
+        "y": 380,
+        "wires": [
+            [
+                "1a3696fc4d3a9410"
+            ]
+        ]
+    },
+    {
+        "id": "136b0b87ee302d95",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "get N and id",
+        "func": "// calculate N\nvar N = (msg.payload.id) % 7711\n// named N and id as flow\nflow.set(\"N\", N);\nflow.set(\"id\", msg.payload.id);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 380,
+        "wires": [
+            [
+                "8639577c8dc76ded"
+            ]
+        ]
+    },
+    {
+        "id": "8639577c8dc76ded",
+        "type": "file in",
+        "z": "0b25a34679899bc4",
+        "name": "challenge3.csv",
+        "filename": "/home/iotpolimi/Documents/challenges/challenge3/challenge3.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1000,
+        "y": 380,
+        "wires": [
+            [
+                "8565c0c366094829"
+            ]
+        ]
+    },
+    {
+        "id": "8565c0c366094829",
+        "type": "csv",
+        "z": "0b25a34679899bc4",
+        "name": "csv2msg",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "No.,Time,Source,Destination,Protocol,Length,Source Port,Destination Port,Info,Payload",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 1180,
+        "y": 440,
+        "wires": [
+            [
+                "4aa57c3eb2d70f2c"
+            ]
+        ]
+    },
+    {
+        "id": "4aa57c3eb2d70f2c",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "No. eq N",
+        "func": "// No. = N\nif (msg.payload[\"No.\"] == flow.get(\"N\"))\n    return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 620,
+        "wires": [
+            [
+                "8b9b12513cb7be82",
+                "4c17f0978b899643"
+            ]
+        ]
+    },
+    {
+        "id": "8b9b12513cb7be82",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "is publish",
+        "func": "// is Publish Message\nif (msg.payload.Info.startsWith(\"Publish Message\"))\n    return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 620,
+        "wires": [
+            [
+                "88a7da621c6c5602"
+            ]
+        ]
+    },
+    {
+        "id": "c44ceb3cd7e00d01",
+        "type": "debug",
+        "z": "0b25a34679899bc4",
+        "name": "debug publish2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1670,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "4210e8fc7ac3039d",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "split topic",
+        "func": "// Get topics array\nconst topics = msg.extractedTopics;\n\n// Get the original payload string\nlet rawPayload = msg.payload.Payload;\n\n// Ensure it's a string\nif (typeof rawPayload !== \"string\") {\n    rawPayload = \"\";\n}\n\n// If payload does not end with '}', truncate to the last valid '}'\nif (!rawPayload.trim().endsWith(\"}\")) {\n    const lastClosingBraceIndex = rawPayload.lastIndexOf(\"}\");\n    if (lastClosingBraceIndex !== -1) {\n        rawPayload = rawPayload.slice(0, lastClosingBraceIndex + 1);\n    } else {\n        rawPayload = \"\";\n    }\n}\n\n// Try to parse the payload string into an array of objects\nlet payloadArray;\ntry {\n    payloadArray = JSON.parse(\"[\" + rawPayload + \"]\");\n} catch (e) {\n    rawPayload = \"\";\n}\n\n// Pad or trim payloads to match topics\nconst mqttMsgs = topics.map((topic, index) => {\n    return {\n        topic: topic,\n        payload: index < payloadArray.length ? payloadArray[index] : \"\",\n        qos: 0,\n        retain: false\n    };\n});\n\nreturn [mqttMsgs];\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 620,
+        "wires": [
+            [
+                "3d40f721c68b542e"
+            ]
+        ]
+    },
+    {
+        "id": "88a7da621c6c5602",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "extract topic",
+        "func": "// extract topics form Info\nconst infoText = msg.payload.Info;\nconst matches = [...infoText.matchAll(/\\[(.*?)\\]/g)];\n\n// save to extractedTopics\nmsg.extractedTopics = matches.map(match => match[1]);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 620,
+        "wires": [
+            [
+                "4210e8fc7ac3039d"
+            ]
+        ]
+    },
+    {
+        "id": "45a98b19287d23e2",
+        "type": "mqtt out",
+        "z": "0b25a34679899bc4",
+        "name": "MQTT Publish 2",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1e9553aa8f6bd45f",
+        "x": 1670,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "b03ee1fda74b7c6b",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "format pub_msg",
+        "func": "// Get the original payload content\nlet originalPayload = msg.payload;\n// Check if some of the payload do not appear\nif (originalPayload.type == \"\" || originalPayload.lat == \"\" || originalPayload.long == \"\" || originalPayload.unit == \"\" || originalPayload.range == \"\" || originalPayload.description == \"\")\n    originalPayload = \"\";\n\n// Construct the new payload structure\nmsg.payload = {\n    \"id\": flow.get(\"id\"),\n    \"timestamp\": Date.now(),\n    \"topic\": msg.topic,\n    \"payload\": originalPayload\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1250,
+        "y": 620,
+        "wires": [
+            [
+                "795e8aefcaa87698"
+            ]
+        ]
+    },
+    {
+        "id": "4c17f0978b899643",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "is ack",
+        "func": "// Check if Info matches one of the three conditions (ACK)\nif (\n    msg.payload.Info.startsWith(\"Connect Ack\") ||\n    msg.payload.Info.startsWith(\"Subscribe Ack\") ||\n    msg.payload.Info.startsWith(\"Publish Ack\")\n) {\n    // global ACK counter\n    var ackCount = global.get(\"ackCount\");\n    ackCount += 1;\n    global.set(\"ackCount\", ackCount);\n    msg.ackCount = ackCount;\n\n    // Determine the ACK type\n    if (msg.payload.Info.startsWith(\"Connect Ack\")) {\n        msg.ackType = \"Connect Ack\";\n    } else if (msg.payload.Info.startsWith(\"Subscribe Ack\")) {\n        msg.ackType = \"Subscribe Ack\";\n    } else if (msg.payload.Info.startsWith(\"Publish Ack\")) {\n        msg.ackType = \"Publish Ack\";\n    }\n\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Initialize ackCount\nglobal.set(\"ackCount\", 0);",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 960,
+        "wires": [
+            [
+                "b423b154aa7b6e09"
+            ]
+        ]
+    },
+    {
+        "id": "65defe9aac3046be",
+        "type": "debug",
+        "z": "0b25a34679899bc4",
+        "name": "debug ack_log msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "2a7077964c0d0cc3",
+        "type": "debug",
+        "z": "0b25a34679899bc4",
+        "name": "debug id_log msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "3d40f721c68b542e",
+        "type": "delay",
+        "z": "0b25a34679899bc4",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "4",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1040,
+        "y": 620,
+        "wires": [
+            [
+                "b03ee1fda74b7c6b"
+            ]
+        ]
+    },
+    {
+        "id": "e6fee1c982e795c9",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "check payload",
+        "func": "// Get payload\nlet payloadmsg = msg.payload.payload;\nif (payloadmsg == null)\n    return null;\nif (payloadmsg.unit == \"F\" && payloadmsg.type == \"temperature\"){\n    msg.payload.meanTemperatureF = (msg.payload.payload.range[0] + msg.payload.payload.range[1])/2;\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 760,
+        "wires": [
+            [
+                "7130f6fe15d5ba81",
+                "dd2e600421b4e306"
+            ]
+        ]
+    },
+    {
+        "id": "2e4d43b89e882cbc",
+        "type": "debug",
+        "z": "0b25a34679899bc4",
+        "name": "debug filtered_publish",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "7130f6fe15d5ba81",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "extract mean",
+        "func": "msg.payload = msg.payload.meanTemperatureF;\ndelete msg.topic;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 760,
+        "wires": [
+            [
+                "9f8191d30b67b849",
+                "a4857d356d69af3b"
+            ]
+        ]
+    },
+    {
+        "id": "f17b325605e7cf9f",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "format filtered_pubs_csv",
+        "func": "msg.payload = {\n    \"No.\": msg.payload.temperatureCount,\n    \"LONG\": msg.payload.payload.long,\n    \"LAT\": msg.payload.payload.lat,\n    \"MEAN_VALUE\": msg.payload.meanTemperatureF,\n    \"TYPE\": msg.payload.payload.type,\n    \"UNIT\": msg.payload.payload.unit,\n    \"DESCRIPTION\": msg.payload.payload.description\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 860,
+        "wires": [
+            [
+                "2e4d43b89e882cbc",
+                "c36d922f8b6d83a5"
+            ]
+        ]
+    },
+    {
+        "id": "a4857d356d69af3b",
+        "type": "ui_chart",
+        "z": "0b25a34679899bc4",
+        "name": "",
+        "group": "022a2ed147fb3271",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "20",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 990,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dd2e600421b4e306",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "temperature count",
+        "func": "// count the number of row\nvar count = flow.get(\"temperatureCount\");\ncount = flow.get(\"temperatureCount\") + 1;\nflow.set(\"temperatureCount\", count);\n\n// add to payload\nmsg.payload.temperatureCount = count;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Initialize mqttCount\nflow.set(\"temperatureCount\", 0);",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 860,
+        "wires": [
+            [
+                "f17b325605e7cf9f"
+            ]
+        ]
+    },
+    {
+        "id": "c36d922f8b6d83a5",
+        "type": "csv",
+        "z": "0b25a34679899bc4",
+        "name": "msg2csv",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "once",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "No.,LONG,LAT, MEAN_VALUE,TYPE,UNIT,DESCRIPTION",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 1100,
+        "y": 860,
+        "wires": [
+            [
+                "0e49502e3047807f"
+            ]
+        ]
+    },
+    {
+        "id": "0e49502e3047807f",
+        "type": "file",
+        "z": "0b25a34679899bc4",
+        "name": "to filtered_publish.csv",
+        "filename": "/home/iotpolimi/Documents/challenges/challenge3/filtered_publish.csv",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1300,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b423b154aa7b6e09",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "format ack_csv",
+        "func": "// change payload to met the requirements\nmsg.payload = {\n    \"No.\": global.get(\"ackCount\"),\n    \"TIMESTAMP\": Date.now(),\n    \"SUB_ID\": flow.get(\"id\"),\n    \"MSG_TYPE\": msg.ackType\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 960,
+        "wires": [
+            [
+                "65defe9aac3046be",
+                "663677a02cd505d6"
+            ]
+        ]
+    },
+    {
+        "id": "663677a02cd505d6",
+        "type": "csv",
+        "z": "0b25a34679899bc4",
+        "name": "msg2csv_ack",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "once",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "No.,TIMESTAMP,SUB_ID,MSG_TYPE",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 960,
+        "y": 960,
+        "wires": [
+            [
+                "9daf70093f06264c"
+            ]
+        ]
+    },
+    {
+        "id": "9daf70093f06264c",
+        "type": "file",
+        "z": "0b25a34679899bc4",
+        "name": "to ack_log.csv",
+        "filename": "/home/iotpolimi/Documents/challenges/challenge3/ack_log.csv",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1160,
+        "y": 960,
+        "wires": [
+            [
+                "ae0442d54014c0e8"
+            ]
+        ]
+    },
+    {
+        "id": "f37e0f95cb32584b",
+        "type": "http request",
+        "z": "0b25a34679899bc4",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1810,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ae0442d54014c0e8",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "generate HTTP request",
+        "func": "var API_KEY = \"3DCHECNZ3BNUKUF8\"\nvar data = global.get(\"ackCount\")\nmsg = {\n    \"method\": \"GET\",\n    \"url\": \"https://api.thingspeak.com/update?api_key=\" + API_KEY + \"&field1=\" + data\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1390,
+        "y": 960,
+        "wires": [
+            [
+                "eae788ec495127a8"
+            ]
+        ]
+    },
+    {
+        "id": "1a3696fc4d3a9410",
+        "type": "function",
+        "z": "0b25a34679899bc4",
+        "name": "receive count",
+        "func": "// count the number of receive packet\nvar count = flow.get(\"receiveCount\");\ncount = flow.get(\"receiveCount\") + 1;\nflow.set(\"receiveCount\", count);\n\n//no more than 80\nif(count <= 80)\n    return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Initialize receiveCount\nflow.set(\"receiveCount\", 0);",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 380,
+        "wires": [
+            [
+                "136b0b87ee302d95",
+                "7ff898eb30687f84"
+            ]
+        ]
+    },
+    {
+        "id": "7ff898eb30687f84",
+        "type": "debug",
+        "z": "0b25a34679899bc4",
+        "name": "debug more than 80?",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c0834ae5bf7e87bb",
+        "type": "debug",
+        "z": "0b25a34679899bc4",
+        "name": "debug publish1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "8db2166520fbbe69",
+        "type": "json",
+        "z": "0b25a34679899bc4",
+        "name": "msg2json",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 780,
+        "y": 80,
+        "wires": [
+            [
+                "08685fb68535f5a4"
+            ]
+        ]
+    },
+    {
+        "id": "eae788ec495127a8",
+        "type": "delay",
+        "z": "0b25a34679899bc4",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "1",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1610,
+        "y": 960,
+        "wires": [
+            [
+                "f37e0f95cb32584b",
+                "71f219b6288477fa"
+            ]
+        ]
+    },
+    {
+        "id": "795e8aefcaa87698",
+        "type": "json",
+        "z": "0b25a34679899bc4",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1460,
+        "y": 620,
+        "wires": [
+            [
+                "45a98b19287d23e2",
+                "c44ceb3cd7e00d01"
+            ]
+        ]
+    },
+    {
+        "id": "cb2b6b2505e3ed13",
+        "type": "mqtt in",
+        "z": "0b25a34679899bc4",
+        "name": "",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "1e9553aa8f6bd45f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 330,
+        "y": 760,
+        "wires": [
+            [
+                "e6fee1c982e795c9"
+            ]
+        ]
+    },
+    {
+        "id": "71f219b6288477fa",
+        "type": "debug",
+        "z": "0b25a34679899bc4",
+        "name": "debug http",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1810,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "223d5b717fb69773",
+        "type": "comment",
+        "z": "0b25a34679899bc4",
+        "name": "What to do? (1)",
+        "info": "",
+        "x": 320,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "005cfb84146d89e1",
+        "type": "comment",
+        "z": "0b25a34679899bc4",
+        "name": "What to do? (2)",
+        "info": "",
+        "x": 320,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6ea3e6daa6667507",
+        "type": "comment",
+        "z": "0b25a34679899bc4",
+        "name": "What to do? (3)",
+        "info": "",
+        "x": 320,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "bbc98a86151e2909",
+        "type": "comment",
+        "z": "0b25a34679899bc4",
+        "name": "What to do? (4)",
+        "info": "",
+        "x": 320,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "d53abb7aaa1be1e2",
+        "type": "comment",
+        "z": "0b25a34679899bc4",
+        "name": "What to do? (5)",
+        "info": "",
+        "x": 320,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "0ff85d4cfb56211e",
+        "type": "comment",
+        "z": "0b25a34679899bc4",
+        "name": "What to do? (6)",
+        "info": "",
+        "x": 620,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "9f8191d30b67b849",
+        "type": "debug",
+        "z": "0b25a34679899bc4",
+        "name": "debug chart",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "1e9553aa8f6bd45f",
+        "type": "mqtt-broker",
+        "name": "localhost:1884",
+        "broker": "127.0.0.1",
+        "port": "1884",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "022a2ed147fb3271",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "0ac55a66e3baff51",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0ac55a66e3baff51",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

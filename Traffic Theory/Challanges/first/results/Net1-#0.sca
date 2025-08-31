@@ -1,0 +1,186 @@
+version 2
+run Net1-0-20241212-14:50:24-3945
+attr configname Net1
+attr datetime 20241212-14:50:24
+attr experiment Net1
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network Net
+attr processid 3945
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 4
+param **.source*.avgInterArrivalTime 0.5s
+param **.queue*.avgServiceTime 0.15s
+param **.queuerand*.avgServiceTimer 0.2s
+param **.queue*.LCFS false
+
+scalar Net.queue1 responseTime:mean 0.20705627680411
+attr interpolationmode none
+attr title "response time at end of service, mean"
+attr unit s
+scalar Net.queue1 responseTime:max 1.694800584617
+attr interpolationmode none
+attr title "response time at end of service, max"
+attr unit s
+scalar Net.queue1 queueingTime:mean 0.059139066000747
+attr interpolationmode none
+attr title "queueing time at dequeue, mean"
+attr unit s
+scalar Net.queue1 queueingTime:max 1.607212395436
+attr interpolationmode none
+attr title "queueing time at dequeue, max"
+attr unit s
+scalar Net.queue1 busy:timeavg 0.28987664506047
+attr interpolationmode sample-hold
+attr title "server busy state, timeavg"
+scalar Net.queue1 qlen:timeavg 0.11589614184313
+attr interpolationmode sample-hold
+attr title "queue length, timeavg"
+scalar Net.queue1 qlen:max 6
+attr interpolationmode sample-hold
+attr title "queue length, max"
+scalar Net.sink1 arrivedMsg:last 7055
+attr interpolationmode none
+attr title "number of arrived msg, last"
+statistic Net.sink1 lifetime:histogram
+field count 7055
+field mean 0.53309702281079
+field stddev 0.39032351470026
+field min 0.003755806477
+field max 3.583464935515
+field sum 3760.9994959301
+field sqrsum 3079.6717890599
+attr interpolationmode none
+attr title "lifetime of arrived msg, histogram"
+attr unit s
+bin	-inf	0
+bin	0	69
+bin	0.04	188
+bin	0.08	277
+bin	0.12	355
+bin	0.16	369
+bin	0.2	397
+bin	0.24	396
+bin	0.28	398
+bin	0.32	332
+bin	0.36	379
+bin	0.4	337
+bin	0.44	346
+bin	0.48	268
+bin	0.52	267
+bin	0.56	269
+bin	0.6	268
+bin	0.64	198
+bin	0.68	196
+bin	0.72	177
+bin	0.76	174
+bin	0.8	160
+bin	0.84	142
+bin	0.88	116
+bin	0.92	107
+bin	0.96	95
+bin	1	92
+bin	1.04	66
+bin	1.08	69
+bin	1.12	60
+bin	1.16	52
+bin	1.2	49
+bin	1.24	42
+bin	1.28	32
+bin	1.32	38
+bin	1.36	29
+bin	1.4	32
+bin	1.44	20
+bin	1.48	14
+bin	1.52	24
+bin	1.56	17
+bin	1.6	16
+bin	1.64	9
+bin	1.68	13
+bin	1.72	11
+bin	1.76	7
+bin	1.8	4
+bin	1.84	11
+bin	1.88	8
+bin	1.92	4
+bin	1.96	3
+bin	2	3
+bin	2.04	5
+bin	2.08	4
+bin	2.12	6
+bin	2.16	1
+bin	2.2	3
+bin	2.24	2
+bin	2.28	4
+bin	2.32	5
+bin	2.36	3
+bin	2.4	2
+bin	2.44	2
+bin	2.48	1
+bin	2.52	0
+bin	2.56	1
+bin	2.6	1
+bin	2.64	0
+bin	2.68	2
+bin	2.72	0
+bin	2.76	1
+bin	2.8	0
+bin	2.84	0
+bin	2.88	1
+bin	2.92	1
+bin	2.96	1
+bin	3	0
+bin	3.04	0
+bin	3.08	1
+bin	3.12	0
+bin	3.16	0
+bin	3.2	1
+bin	3.24	0
+bin	3.28	0
+bin	3.32	0
+bin	3.36	0
+bin	3.4	0
+bin	3.44	0
+bin	3.48	1
+bin	3.52	0
+bin	3.56	1
+bin	3.6	0
+scalar Net.sink1 lifetime:mean 0.53309702281079
+attr interpolationmode none
+attr title "lifetime of arrived msg, mean"
+attr unit s
+scalar Net.sink1 lifetime:max 3.583464935515
+attr interpolationmode none
+attr title "lifetime of arrived msg, max"
+attr unit s
+scalar Net.queuerand1 responseTimer:mean 0.32604074600668
+attr interpolationmode none
+attr title "response time at end of service, mean"
+attr unit s
+scalar Net.queuerand1 responseTimer:max 3.394404072848
+attr interpolationmode none
+attr title "response time at end of service, max"
+attr unit s
+scalar Net.queuerand1 queueingTimer:mean 0.12551145039911
+attr interpolationmode none
+attr title "queueing time at dequeue, mean"
+attr unit s
+scalar Net.queuerand1 queueingTimer:max 3.303574454969
+attr interpolationmode none
+attr title "queueing time at dequeue, max"
+attr unit s
+scalar Net.queuerand1 busyr:timeavg 0.39298171680872
+attr interpolationmode sample-hold
+attr title "server busy state, timeavg"
+scalar Net.queuerand1 qlenr:timeavg 0.24596757849049
+attr interpolationmode sample-hold
+attr title "queue length, timeavg"
+scalar Net.queuerand1 qlenr:max 7
+attr interpolationmode sample-hold
+attr title "queue length, max"
+

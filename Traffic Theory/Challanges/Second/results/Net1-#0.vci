@@ -1,0 +1,82 @@
+file 1602917 1734013012                                         
+version 2
+run Net1-0-20241212-15:16:47-5019
+attr configname Net1
+attr datetime 20241212-15:16:47
+attr experiment Net1
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network Net
+attr processid 5019
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 4
+param **.**.avgInterArrivalTime 0.25s
+param **.**.avgServiceTime 0.5s
+param **.buffer*.LCFS false
+param **.buffer*.queueLimit 100
+param **.n_servers 8
+
+vector 0 Net.buffer1 qlen:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 1 Net.server[1] responseTime:vector ETV
+attr interpolationmode none
+attr title "response time at end of service, vector"
+attr unit s
+vector 2 Net.sink1 lifetime:vector ETV
+attr interpolationmode none
+attr title "lifetime of arrived msg, vector"
+attr unit s
+vector 3 Net.sink1 arrivedMsg:vector ETV
+attr interpolationmode none
+attr title "number of arrived msg, vector"
+vector 4 Net.server[0] responseTime:vector ETV
+attr interpolationmode none
+attr title "response time at end of service, vector"
+attr unit s
+vector 5 Net.server[2] responseTime:vector ETV
+attr interpolationmode none
+attr title "response time at end of service, vector"
+attr unit s
+vector 6 Net.server[3] responseTime:vector ETV
+attr interpolationmode none
+attr title "response time at end of service, vector"
+attr unit s
+vector 7 Net.server[4] responseTime:vector ETV
+attr interpolationmode none
+attr title "response time at end of service, vector"
+attr unit s
+vector 8 Net.server[5] responseTime:vector ETV
+attr interpolationmode none
+attr title "response time at end of service, vector"
+attr unit s
+vector 9 Net.server[6] responseTime:vector ETV
+attr interpolationmode none
+attr title "response time at end of service, vector"
+attr unit s
+vector 10 Net.server[7] responseTime:vector ETV
+attr interpolationmode none
+attr title "response time at end of service, vector"
+attr unit s
+vector 11 Net.buffer1 queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+0	2085 1218 0 99416 0 3564.750027688072 45 0 4 54 126
+1	3303 154856 9 100443 0.947829200734 3599.778102857275 3837 0.00014365118 3.772277502219 1954.3995674049 1959.5212006162
+2	158159 579097 10 100444 0.947829200734 3599.778102857275 14347 1.393726e-06 5.649335282057 7217.7264288823 7222.7296182511
+3	737256 440476 10 100444 0.947829200734 3599.778102857275 14347 1 14347 102925378 984481240570
+4	1177732 190848 16 100417 1.15440951532 3599.221877977813 4728 1.2770924e-05 3.789428866418 2421.4526614105 2484.5988348632
+5	1368580 111385 47 100432 2.751961408163 3599.624166670812 2758 1.393726e-06 3.504405820807 1364.9002624467 1298.9944287854
+6	1479965 67805 66 100407 3.779840146029 3598.679051459533 1680 0.000237349984 4.169801800281 822.45135238648 818.90797483291
+7	1547770 34567 145 100295 6.972714195233 3594.708024230137 857 0.000357148054 5.649335282057 412.39841107824 414.71316598478
+8	1582337 14198 1460 99419 55.300525064501 3564.937363714889 352 1.5344823e-05 3.392557676363 175.88899966394 182.92221601401
+9	1596535 4071 1849 99429 69.467560742665 3565.083184178769 101 0.010014112154 2.63605087162 46.724206133352 46.208233898614
+10	1600606 1399 3658 99435 134.4466809229 3565.187288233446 34 0.001398527555 1.942607082581 16.351524690976 13.375566897959
+11	1602005 911 8871 99416 327.153271614694 3564.750027688072 22 0.011913514541 0.49689272121 3.159443667122 0.89008862275365
+

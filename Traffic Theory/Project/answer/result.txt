@@ -1,0 +1,8 @@
+Average general queuing time:
+1.52772
+Average response time:
+3.73183
+Utilization factor of the server:
+0.52391
+Queue length over time:
+->Queue_length.xlsx

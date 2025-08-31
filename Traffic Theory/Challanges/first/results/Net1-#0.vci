@@ -1,0 +1,64 @@
+file 2010365 1734011436                                         
+version 2
+run Net1-0-20241212-14:50:24-3945
+attr configname Net1
+attr datetime 20241212-14:50:24
+attr experiment Net1
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network Net
+attr processid 3945
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 4
+param **.source*.avgInterArrivalTime 0.5s
+param **.queue*.avgServiceTime 0.15s
+param **.queuerand*.avgServiceTimer 0.2s
+param **.queue*.LCFS false
+
+vector 0 Net.queue1 qlen:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 1 Net.queuerand1 qlenr:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 2 Net.queuerand1 busyr:vector ETV
+attr interpolationmode sample-hold
+attr title "server busy state, vector"
+vector 3 Net.queue1 queueingTime:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 4 Net.queue1 responseTime:vector ETV
+attr interpolationmode none
+attr title "response time at end of service, vector"
+attr unit s
+vector 5 Net.queuerand1 queueingTimer:vector ETV
+attr interpolationmode none
+attr title "queueing time at dequeue, vector"
+attr unit s
+vector 6 Net.queuerand1 responseTimer:vector ETV
+attr interpolationmode none
+attr title "response time at end of service, vector"
+attr unit s
+vector 7 Net.sink1 lifetime:vector ETV
+attr interpolationmode none
+attr title "lifetime of arrived msg, vector"
+attr unit s
+vector 8 Net.sink1 arrivedMsg:vector ETV
+attr interpolationmode none
+attr title "number of arrived msg, vector"
+0	1596 111241 0 42277 0 3593.570411491085 4079 0 6 3715 6447
+1	112837 156234 0 42299 0 3595.146815259157 5725 0 7 6360 13382
+2	269071 229155 0 42329 0 3599.452476203076 8387 0 1 4193 4193
+3	498226 218910 2 42326 0 3599.336786235774 7055 0 1.607212395436 417.22611063527 166.76201973024
+4	717136 283595 3 42327 0.346322854596 3599.393931968233 7055 4.18118e-07 1.694800584617 1460.782032853 597.13925478588
+5	1000731 229620 4 42328 0.346322854596 3599.393931968233 7055 0 3.303574454969 885.48328256576 626.38701277013
+6	1230351 283625 5 42329 0.504798051655 3599.452476203076 7055 2.9276079e-05 3.394404072848 2300.2174630771 1533.2714995994
+7	1513976 283636 6 42330 0.504798051655 3599.452476203076 7055 0.003755806477 3.583464935515 3760.9994959301 3079.6717890599
+8	1797612 212752 6 42330 0.504798051655 3599.452476203076 7055 1 7055 24890040 117074451480
+
