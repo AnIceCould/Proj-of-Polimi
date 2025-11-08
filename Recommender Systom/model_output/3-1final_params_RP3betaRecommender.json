@@ -1,0 +1,6 @@
+{
+    "topK": 256,
+    "alpha": 2.0,
+    "beta": 0.1218,
+    "normalize_similarity": true
+}
