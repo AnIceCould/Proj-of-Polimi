@@ -64,25 +64,7 @@ if __name__ == '__main__':
     # --- 兼容模型的列表 ---
     # 已经移除了所有需要额外特征(ICM/UCM)的模型，并修正了类名
     recommender_class_list = [
-        # --- Baselines ---
-        Random,
-        TopPop,
-        GlobalEffects,
-        # --- KNN models ---
-        UserKNNCFRecommender,
-        ItemKNNCFRecommender,
-        # --- Graph models ---
-        P3alphaRecommender,
-        RP3betaRecommender,
-        # --- Matrix Factorization models ---
-        IALSRecommender,
-        MatrixFactorization_BPR_Cython,
-        PureSVDRecommender,
-        NMFRecommender,
-        # --- Advanced models ---
         SLIM_BPR_Cython,
-        EASE_R_Recommender,
-        # SLIMElasticNetRecommender, # 训练非常慢，通常用于调优而不是快速测试
     ]
 
     # --- 评估器 ---

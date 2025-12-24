@@ -19,8 +19,13 @@ from RecSys_Course_AT_PoliMi.Data_manager.split_functions.split_train_validation
 from RecSys_Course_AT_PoliMi.Evaluation.Evaluator import EvaluatorHoldout
 # 导入核心的超参数搜索函数
 from RecSys_Course_AT_PoliMi.HyperparameterTuning.run_hyperparameter_search import runHyperparameterSearch_Collaborative
+from Recommenders.FactorizationMachines import LightFMRecommender
 from Recommenders.MatrixFactorization.Cython.MatrixFactorizationImpressions_Cython import \
     MatrixFactorization_FunkSVD_Cython
+from Recommenders.Neural import MultVAE_PyTorch_Recommender
+from Recommenders.SLIM.SLIM_BPR_Python import SLIM_BPR_Python
+from Recommenders.GraphBased.LightGCNRecommender import LightGCNRecommender
+
 # 导入你的数据加载函数 (假设此脚本与main.py在同一目录)
 from main import load_and_preprocess_data
 
@@ -62,9 +67,10 @@ if __name__ == '__main__':
     # --- 待优化的模型列表 ---
     # 已经移除了不兼容的模型，并修正了类名
     collaborative_algorithm_list = [
-        EASE_R_Recommender,
-        MatrixFactorization_FunkSVD_Cython,
-        GlobalEffects,
+        LightGCNRecommender,
+        MultVAE_PyTorch_Recommender,
+        LightFMRecommender,
+        SLIM_BPR_Python
     ]
 
     # --- 初始化评估器 ---
