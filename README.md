@@ -15,7 +15,8 @@ This hubs lists all the project & homework(about coding) I did during polimi in 
 	1. Capture network packets and predict websites
 	2. Reproduce footprinting papers
 	3. Perform cluster analysis on MAC addresses to predict devices.
-2. Project, Predicting packet loss in wireless and fiber optic communications using neural networks and XGBoost..
+2. Project, Predicting packet loss in wireless and fiber optic communications using neural networks and XGBoost.
+> **Extended Work**: Developed a backend platform [CPE Platform](https://github.com/AnIceCould/cpe_platform)
 
 ## Lab Experience
 The codes are related to data processing.
