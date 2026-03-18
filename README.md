@@ -34,3 +34,6 @@ Challenges,
 
 ## Computer Graphics
 Project, A medieval simulator using **C++** and **Vulkan**.
+
+## Communication In Green Infrastructures
+Project, for High Frequencies and Plant Stress Classification with fitting method, EM simulator and classification models.
