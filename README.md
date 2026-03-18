@@ -16,6 +16,7 @@ A collection of coding projects and assignments from my Telecommunication Engine
 	2. Reproduce footprinting papers.
 	3. Perform cluster analysis on MAC addresses to predict devices.
 2. Project, Predicting packet loss in wireless and fiber optic communications using **neural networks** and **XGBoost**.
+> **Extended Work**: Developed a backend platform [CPE Platform](https://github.com/AnIceCould/cpe_platform)
 
 ## Recommender System
 Challenge, Designing and optimizing **MultVAE**, **LightGCN** and so on for a Kaggle recommendation competition.
