@@ -1,0 +1,3 @@
+[submodule "kitchen_inventory_app"]
+	path = kitchen_inventory_app
+	url = https://github.com/AnIceCould/kitchen_inventory_app.git
