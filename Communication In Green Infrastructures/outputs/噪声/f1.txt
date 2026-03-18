@@ -1,0 +1,44 @@
+底噪：
+
+-10
+准确率 (Accuracy):  0.5500
+精确率 (Precision): 0.5601
+召回率 (Recall):    0.5500
+F1 分数 (F1-Score): 0.5531
+
+
+-20
+准确率 (Accuracy):  0.7000
+精确率 (Precision): 0.7049
+召回率 (Recall):    0.7000
+F1 分数 (F1-Score): 0.7003
+
+-25
+准确率 (Accuracy):  0.6900
+精确率 (Precision): 0.7151
+召回率 (Recall):    0.6900
+F1 分数 (F1-Score): 0.6893
+
+-30
+准确率 (Accuracy):  0.9000
+精确率 (Precision): 0.9038
+召回率 (Recall):    0.9000
+F1 分数 (F1-Score): 0.8981
+
+-35
+准确率 (Accuracy):  0.9100
+精确率 (Precision): 0.9187
+召回率 (Recall):    0.9100
+F1 分数 (F1-Score): 0.9097
+
+-40
+准确率 (Accuracy):  0.9500
+精确率 (Precision): 0.9518
+召回率 (Recall):    0.9500
+F1 分数 (F1-Score): 0.9499
+
+-100
+准确率 (Accuracy):  0.9400
+精确率 (Precision): 0.9440
+召回率 (Recall):    0.9400
+F1 分数 (F1-Score): 0.9398

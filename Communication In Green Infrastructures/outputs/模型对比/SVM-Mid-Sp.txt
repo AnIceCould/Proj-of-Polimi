@@ -1,0 +1,20 @@
+------------------------------
+SVM 模型评估结果 (Kernel=RBF):
+准确率 (Accuracy):  0.9700
+精确率 (Precision): 0.9723
+召回率 (Recall):    0.9700
+F1 分数 (F1-Score): 0.9694
+------------------------------
+
+各类别详细指标:
+              precision    recall  f1-score   support
+
+   A_Drought       1.00      1.00      1.00        20
+      B_Salt       1.00      0.85      0.92        20
+C_Structural       1.00      1.00      1.00        20
+ D_Metabolic       0.95      1.00      0.98        20
+      Normal       0.91      1.00      0.95        20
+
+    accuracy                           0.97       100
+   macro avg       0.97      0.97      0.97       100
+weighted avg       0.97      0.97      0.97       100
